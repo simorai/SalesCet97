@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using SalesCet97.Web.Data;
+
 namespace SalesCet97.Web
 {
     public class Program
@@ -8,6 +11,13 @@ namespace SalesCet97.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Add Entity Framework and SQL Server
+            builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
 
             var app = builder.Build();
 
